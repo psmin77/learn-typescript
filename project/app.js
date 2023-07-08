@@ -38,8 +38,11 @@ let isRecoveredLoading = false;
 
 // api
 function fetchCovidSummary() {
-  const url = 'https://api.covid19api.com/summary';
-  return axios.get(url);
+  const url = 'http://apis.data.go.kr/1352000/ODMS_COVID_04/callCovid04Api?serviceKey=';
+  const key = '9Ajz01IOELOw1Ybi16gqy4Cn%2B%2BM2Q5XlVfGGqBNjoeu2Hnix2aAGnbtGP4W56NaquGK77BpodFCodSQ4DGtbHg%3D%3D';
+  return axios.get(url + key + '&pageNo=1&numOfRows=10&gubun=합계');
+  // // const url = 'https://api.covid19api.com/summary';
+  // return axios.get(url);
 }
 
 function fetchCountryInfo(countryCode, status) {
