@@ -34,7 +34,7 @@ function createSpinnerElement(id: string) {
 
 // state
 let isDeathLoading = false;
-let isRecoveredLoading = false;
+const isRecoveredLoading = false;
 
 // api
 function fetchCovidSummary() {
@@ -49,7 +49,7 @@ function fetchCovidSummary() {
 enum CovidStatus {
   Confirmed = 'confirmed',
   recovered = 'recovered',
-  Deaths = 'deaths'
+  Deaths = 'deaths',
 }
 function fetchCountryInfo(countryCode: string, status: CovidStatus) {
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
@@ -85,14 +85,17 @@ async function handleListClick(event: any) {
   clearRecoveredList();
   startLoadingAnimation();
   isDeathLoading = true;
-  const { data: deathResponse } = await fetchCountryInfo(selectedId, CovidStatus.Deaths);
+  const { data: deathResponse } = await fetchCountryInfo(
+    selectedId,
+    CovidStatus.Deaths,
+  );
   const { data: recoveredResponse } = await fetchCountryInfo(
     selectedId,
-    CovidStatus.Confirmed
+    CovidStatus.Confirmed,
   );
   const { data: confirmedResponse } = await fetchCountryInfo(
     selectedId,
-    CovidStatus.Confirmed
+    CovidStatus.Confirmed,
   );
   endLoadingAnimation();
   setDeathsList(deathResponse);
@@ -168,7 +171,7 @@ function endLoadingAnimation() {
 async function setupData() {
   const { data } = await fetchCovidSummary();
   console.log('api data', data);
-  
+
   setTotalConfirmedNumber(data);
   setTotalDeathsByWorld(data);
   setTotalRecoveredByWorld(data);
@@ -177,7 +180,7 @@ async function setupData() {
 }
 
 function renderChart(data: any, labels: any) {
-  var ctx = $('#lineChart').getContext('2d');
+  const ctx = $('#lineChart').getContext('2d');
   Chart.defaults.color = '#f5eaea';
   Chart.defaults.font.family = 'Exo 2';
   new Chart(ctx, {
@@ -201,7 +204,9 @@ function setChartData(data: any) {
   const chartData = data.slice(-14).map((value: any) => value.Cases);
   const chartLabel = data
     .slice(-14)
-    .map((value: any) => new Date(value.Date).toLocaleDateString().slice(5, -1));
+    .map((value: any) =>
+      new Date(value.Date).toLocaleDateString().slice(5, -1),
+    );
   renderChart(chartData, chartLabel);
 }
 
