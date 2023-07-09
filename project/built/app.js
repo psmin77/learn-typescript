@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 // utils
-function $(selector) {
+function $(selecto) {
     return document.querySelector(selector);
 }
 function getUnixTimestamp(date) {
@@ -186,6 +186,7 @@ function setupData() {
                 case 0: return [4 /*yield*/, fetchCovidSummary()];
                 case 1:
                     data = (_a.sent()).data;
+                    console.log('api data', data);
                     setTotalConfirmedNumber(data);
                     setTotalDeathsByWorld(data);
                     setTotalRecoveredByWorld(data);
