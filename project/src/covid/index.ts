@@ -1,4 +1,4 @@
-interface Country {
+export interface Country {
   Country: string;
   CountryCode: string;
   Date: string;
@@ -22,7 +22,7 @@ interface Global {
 
 export interface CovidSummaryResponse {
   Countries: Country[];
-  Data: string;
+  Date: string;
   Global: Global;
   Message: string;
 }
@@ -32,3 +32,18 @@ export enum CovidStatus {
   recovered = 'recovered',
   Deaths = 'deaths',
 }
+
+export interface CountryInfo {
+  Cases: number;
+  City: string;
+  CityCode: string;
+  Country: string;
+  CountryCode: string;
+  Date: string;
+  Lat: string;
+  Lon: string;
+  Province: string;
+  Status: string;
+}
+
+export type CovidCountryResponse = CountryInfo[];
